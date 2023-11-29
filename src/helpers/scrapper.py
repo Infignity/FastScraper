@@ -52,3 +52,4 @@ class ScrapperHelper:
             # Close the WebDriver
             driver.quit()
  
+ 
