@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="starter-template">
+  <h4 class="mt-1">Web Scrappers</h4>
+
+  <section class="vh-auto vw-auto mt-5">
+    <div class="container py-2 h-50">
+        <div class="row d-flex h-100 justify-content-center align-items-center">
+            <div class="col col-lg-7 col-xl-7">
+                <div class="card rounded-3">
+                    <div class="card-body p-4">
+
+                        <h4 class="text-center my-3 pb-3">Scrap Data</h4>
+                        <form class="form" method="post" id="myForm" enctype="multipart/form-data">
+
+                            <div class="file-drop-area">
+                                <span class="choose-file-button">Choose files</span>
+                                <span class="file-message">or drag and drop files here</span>
+                                <input class="file-input" id="file" type="file" multiple>
+                            </div>
+
+                            <div class="mt-5 p-1">
+                                <button type="submit" class="btn btn-outline-success"> Submit</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </section>
+    <h5>Task Status</h5>
+    <div class="container-fluid mt-4 d-flex flex-row " id="tasks">
+
+    </div>
+{% endblock %}

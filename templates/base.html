@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scrappers {% block title %}{% endblock %}</title>
+    <!-- meta -->
+    {% include 'partials/headers.html' %}
+    {% block css %}{% endblock %}
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- children templates extends this -->
+      {% block content %}{% endblock %}
+    </div>
+    {% include 'partials/footer.html' %}
+    <!-- scripts -->
+    <script src="{{url_for('static', path='/main.js')}}" type="text/javascript"></script>
+    <!-- children templates extends this -->
+    {% block js %}{% endblock %}
+
+  </body>
+
+</html>

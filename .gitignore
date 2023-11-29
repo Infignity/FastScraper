@@ -1,0 +1,5 @@
+venv
+.env
+celerybeat*
+**/__pycache__
+**/**/__pycache__
