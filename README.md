@@ -9,7 +9,7 @@ python3 -m venv venv
 source venv/bin/activate
 
 # install requirements
-pip3 install "fastapi[all]" beautifulsoup4 pandas celery redis beanie python-dotenv selenium motor
+pip3 install "fastapi[all]" beautifulsoup4 pandas celery redis beanie python-dotenv selenium motor selectolax
 
 # deactivate enviroment
 deactivate

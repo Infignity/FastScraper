@@ -1,8 +1,12 @@
 """config file"""
 import os
+import random
 from dotenv import load_dotenv
 from pydantic import ConfigDict
+from src.core.agents import agents
 
+BASE_DIR = "/".join(os.path.dirname(os.path.realpath(__file__)).split("/")[:-1])
+print(BASE_DIR)
 # load config
 load_dotenv()
 
@@ -32,3 +36,8 @@ simple_pydantic_model_config = ConfigDict(
     alias_generator=to_camel_case,
     populate_by_name=True
 )
+
+
+def get_random_ua():
+    '''get random user agents'''
+    return random.choice(agents)

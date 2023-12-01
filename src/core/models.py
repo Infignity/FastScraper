@@ -21,8 +21,31 @@ class TaskResult(Document):
         alias="_id"
     )
     task_id: PydanticObjectId
-    landing_page_text: str
-    url: str
+    first_name: str = None
+    last_name: str = None
+    linkedin_url: str = None
+    organization_name: str = None
+    department: str = None
+    seniority: str = None
+    industry: str = None
+    headline: str = None
+    keywords: str = None
+    phone: str = None
+    email: str = None
+    domain: str = None
+    company_address: str = None
+    num_employee: str = None
+    headline: str = None
+    entity_id: str = None
+    city: str = None
+    state: str = None
+    country: str = None
+    person_linkedin: str = None
+    company_linkedin: str = None
+    landing_page_text: str = None
+    company_name: str = None
+    website: str = None
+    apolo_email: str = None
 
 
 class Task(Document):

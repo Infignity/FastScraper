@@ -26,7 +26,6 @@ class PandasCsv:
         df = pd.read_csv(file_name)
         # convert to list of dictionary
         data_list: List[Dict[str, any]] = df.drop_duplicates().to_dict(orient='records')
-        print(data_list)
         return data_list
     
     @staticmethod

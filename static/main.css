@@ -1,3 +1,25 @@
+.flash-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0; /* Align to the right */
+    width: 300px; /* Adjust the width as needed */
+    padding: 15px;
+    background-color: #ff1100;
+    color: white;
+    text-align: center;
+    z-index: 1000; /* Set a higher z-index */
+}
+
+.flash-message button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    float: right;
+    font-size: 16px;
+}
+
 .footer {
     margin-top: 99vh;
     background-color: #f8f9fa;

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="vh-auto vw-auto mt-5">
+        <div class="container m-4 d-flex">
+            <div class="row">
+                {% if tasks %}
+                  {% for ts in tasks %}
+                   <div class="card m-2 col-md-3">
+                        <div class="card-body">
+                        <h5 class="card-title">Task-Id {{ts.celery_task_id}}</h5>
+                        <p class="card-text">status: {{ts.state}} </p>
+                        <a href="/specific-task/{{ ts.id }}" class="btn btn-outline-success">view</a>
+                        </div>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+
+            </div>
+    
+        </div>
+
+    </section>
+{% endblock %}

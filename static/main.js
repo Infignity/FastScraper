@@ -2,7 +2,61 @@
 (function() {
     console.log('checker setup');
 })();
+// close message
+const closeFlashMessage= ()=> {
+    const flashMessage = document.getElementById('flash-message');
+    flashMessage.style.display = 'none';
+}
+// Function to show the flash message
+const showFlashMessage = (message) => {
+    const flashMessage = document.getElementById('flash-message');
+    const flashMessageText = document.getElementById('flash-message-text');
+
+    flashMessageText.textContent = message;
+    flashMessage.style.backgroundColor = '#198753';
+    flashMessage.style.display = 'block';
+
+    // Auto-hide after 5 seconds (adjust as needed)
+    setTimeout(() => {
+        closeFlashMessage();
+    }, 2000);
+}
   
+const getStatusTask = (taskID) => {
+    fetch(`/tasks/${taskID}`, {
+        method: 'GET',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(res => {
+        console.log(`Response: ${res}`)
+        const html = `
+            <div class="card m-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Task-Id ${taskID}</h5>
+                    <p class="card-text">status: ${res?.state ? res.state : res.task_status}</p>
+                    ${res.task_status == 'SUCCESS' ? `<a href="/success-task/${res?.result_id}" class="btn btn-outline-success">view</a>` : '<p></p>'}
+                </div>
+            </div>
+        `;
+
+        const tasksDiv = document.getElementById('tasks');
+        tasksDiv.innerHTML = html;
+
+        const taskStatus = res.task_status;
+        if (taskStatus === 'PENDING') showFlashMessage(`task with the id: ${taskID} is ${taskStatus} `);
+        // if task is successfull
+        if (taskStatus === 'SUCCESS') showFlashMessage(`task with the id: ${taskID} is completed `);
+        if (taskStatus === 'SUCCESS' || taskStatus === 'FAILURE') return false;
+        setTimeout(function() {
+            getStatusTask(res.task_id);
+        }, 10000);
+    })
+    .catch(err => console.log(`Error: ${err}`));
+} 
+
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("myForm").addEventListener("submit", function (e) {
         e.preventDefault();
@@ -16,9 +70,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             method: 'POST',
             body: formData
         })
-            .then(resp => resp.text())
+            .then(resp => resp.json())
             .then(data => {
-                getStatusTask(data.task_id)
+                console.log(data)
+                console.log(`Response-Data: ${data?.celery_task_id}`)
+                showFlashMessage(`task started`);
+                getStatusTask(data?.celery_task_id)
 
             })
             .catch(error => {
@@ -29,36 +86,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 });
 
-const getStatusTask = (taskID) => {
-    fetch(`/tasks/${taskID}`, {
-        method: 'GET',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-    })
-    .then(response => response.json())
-    .then(res => {
-        console.log(res)
-        const html = `
-            <div class="card m-3" style="width: 18rem;">
-                <div class="card-body">
-                <h5 class="card-title">Task-Id ${taskID}</h5>
-                <p class="card-text">status: ${res.state} </p>
-                <a href="/specific-task/${taskStatus }" class="btn btn-outline-success">view</a>
-                </div>
-            </div>
-        `;
-        const tasksDiv = document.getElementById('tasks');
-        tasksDiv.innerHTML = html;
 
-        const taskStatus = res.task_status;
-        if (taskStatus === 'SUCCESS' || taskStatus === 'FAILURE') return false;
-        setTimeout(function() {
-        getStatus(res.task_id);
-        }, 2000);
-    })
-    .catch(err => console.log(err));
-} 
 
 // Function to generate a random UUID
 const generateUUID = () => {
@@ -69,10 +97,10 @@ const generateUUID = () => {
     });
 }
 
-async function handleDownload() {
+async function handleDownload(task_id) {
         try {
             // Fetch the task_id from the template
-            const task_id = "{{ task_id }}";
+            // const task_id = "{{ task_id }}";
 
             // Fetch the CSV file using FastAPI endpoint with task_id
             const response = await fetch(`/download-csv/${task_id}`);

@@ -5,10 +5,53 @@
     <!-- meta -->
     {% include 'partials/headers.html' %}
     {% block css %}{% endblock %}
+    <style>
+    .flash-message {
+        display: none;
+        position: fixed;
+        top: 10;
+        right: 0; /* Align to the right */
+        width: 300px; /* Adjust the width as needed */
+        padding: 15px;
+        background-color: #198753;
+        color: white;
+        text-align: center;
+        z-index: 1000; /* Set a higher z-index */
+        border-radius: 10px ;
+    }
+
+    .flash-message button {
+        background-color: transparent;
+        color: white;
+        border: none;
+        cursor: pointer;
+        float: right;
+        font-size: 16px;
+    }
+    </style>
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Web Scrappers</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/taskss">Task</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <div class="container">
+      {% include 'partials/flash_message.html' %}
       <!-- children templates extends this -->
       {% block content %}{% endblock %}
     </div>
