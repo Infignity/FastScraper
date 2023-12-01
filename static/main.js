@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const fileInput = document.getElementById('file');
         const selectedFile = fileInput.files[0];
         const formData = new FormData();
-
         formData.append('file', selectedFile);
 
         fetch('/scrape', {
@@ -76,12 +75,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 console.log(`Response-Data: ${data?.celery_task_id}`)
                 showFlashMessage(`task started`);
                 getStatusTask(data?.celery_task_id)
-
             })
             .catch(error => {
                 console.error(error);
             });
-
     });
 
 });

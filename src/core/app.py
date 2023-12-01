@@ -54,7 +54,6 @@ async def scrap_task(
     file: UploadFile = File(...)
 ):
     """ Register new scraping task """
-    print("i was called")
     csv_list: List[Dict[str, any]] = []
     try:
         csv_bytes = file.file.read()
