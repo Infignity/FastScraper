@@ -33,7 +33,6 @@ async def start_db():
     """Initializes the database"""
     await init_db(models=MODELS)
 
-
 @app.exception_handler(RequestValidationError)
 async def request_validation_exception_handler(
     request: Request, exc: RequestValidationError

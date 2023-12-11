@@ -14,9 +14,6 @@ class ScrapperHelper:
     @staticmethod
     def bs4(contents):
         '''applying beautiful soup'''
-        # if response.status_code != 200:
-        #     print("Error fetching page")
-        # content = response.content
         soup = BeautifulSoup(contents, "html.parser")
         return soup.get_text()
 
