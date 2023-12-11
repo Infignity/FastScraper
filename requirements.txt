@@ -84,7 +84,7 @@ tldextract==5.1.1
 toml==0.10.2
 trio==0.23.1
 trio-websocket==0.11.1
-Twisted==22.10.0
+Twisted==23.10.0
 typing_extensions==4.8.0
 tzdata==2023.3
 ujson==5.8.0
